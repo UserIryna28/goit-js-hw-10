@@ -13,7 +13,8 @@ const countryInfo = document.querySelector(".country-info")
 
 input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY))
 
-function onInput() {
+function onInput(e) {
+    e.preventDefault()
     const name = input.value.trim()
 
     if (name === '') {
@@ -22,12 +23,12 @@ function onInput() {
     }
    fetchCountries(name)
  .then(countries => {
-     if (countries.lenght === 0) {
+     if (countries.length === 1) {
          Notify.failure("Unfortunately, there is no country with that name")
          clearMarkup()
-     } else if (countries.lenght >= 10) {
+     } else if (countries.length >= 10) {
          Notify.info("Too many matches found. Please enter a more specific name.")
-     } else if (countries.lenght > 1 && countries.lenght <= 10) {
+     } else if (countries.length > 1 && countries.length <= 10) {
         showingCountryList(countries) 
      } else {
          showingCountryInfo(country[0])
@@ -75,8 +76,5 @@ function showingCountryInfo(countries) {
 
 function clearMarkup() {
     countryList.innerHTML = "";
-    countryInfo.innerHTML = ""
-}
-function clearCountryInfo() {
     countryInfo.innerHTML = ""
 }

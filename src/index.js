@@ -42,6 +42,7 @@ function onInput(e) {
  }
 
 function showingCountryList(countries) {
+    countryList.innerHTML = '';
     const markup = countries
 
      .map(({ name, flags }) => {
@@ -52,7 +53,8 @@ function showingCountryList(countries) {
           </li>
           `
      })
-    .join('')
+        .join('')
+    countryInfo.innerHTML = showingCountryList
   return markup
 }
     
@@ -66,10 +68,13 @@ function showingCountryInfo(countries) {
             <li class="country-info__item"><p><b>Population: </b>${population}</p></li>
             <li class="country-info__item"><p><b>Languages: </b>${Object.values(languages).join(', ')}</p></li>
         </ul>
-        `
+       `
     })
-    .join('')
-  return markup
+       countryInfo.innerHTML = showingCountryInfo  
+        .join('')
+    
+    return markup
+    
 } 
 
 

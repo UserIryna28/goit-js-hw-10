@@ -23,12 +23,12 @@ function onInput(e) {
     }
    fetchCountries(name)
  .then(countries => {
-     if (countries.length === 1) {
-         Notify.failure("Unfortunately, there is no country with that name")
-         clearMarkup()
-     } else if (countries.length >= 10) {
+    //  if (countries.length === 1) {
+    //      Notify.failure("Unfortunately, there is no country with that name")
+    //      clearMarkup()
+      if (countries.length >= 10) {
          Notify.info("Too many matches found. Please enter a more specific name.")
-     } else if (countries.length > 1 && countries.length <= 10) {
+     } else if ( countries.length <= 10) {
         showingCountryList(countries) 
      } else {
          showingCountryInfo(country[0])
@@ -53,8 +53,9 @@ function showingCountryList(countries) {
           </li>
           `
      })
+        countryList.innerHTML = markup
         .join('')
-    countryInfo.innerHTML = showingCountryList
+    
   return markup
 }
     
@@ -70,7 +71,7 @@ function showingCountryInfo(countries) {
         </ul>
        `
     })
-       countryInfo.innerHTML = showingCountryInfo  
+       countryInfo.innerHTML = markup
         .join('')
     
     return markup

@@ -23,18 +23,22 @@ function onInput(e) {
     }
    fetchCountries(name)
  .then(countries => {
-    //  if (countries.length === 1) {
-    //      Notify.failure("Unfortunately, there is no country with that name")
-    //      clearMarkup()
-      if (countries.length >= 10) {
-         Notify.info("Too many matches found. Please enter a more specific name.")
-     } else if ( countries.length <= 10) {
-        showingCountryList(countries) 
-     } else {
-         showingCountryInfo(country[0])
+     if (countries.length === 1) {
+        //  countryInfo.innerHTML = '';
+         
+         countryInfo.innerHTML = markup
+         showingCountryInfo(countries)
          clearMarkup()
-     }
-})
+     } else if (countries.length >= 10) {
+         Notify.info("Too many matches found. Please enter a more specific name.")
+     } else if (countries.length <= 10) {
+         showingCountryList(countries)
+    
+         } else {
+             showingCountryInfo(country[0])
+              clearMarkup()
+          }
+     })
     .catch(() => {
         Notify.failure('No country with this name was found')  
         clearMarkup()
@@ -42,7 +46,7 @@ function onInput(e) {
  }
 
 function showingCountryList(countries) {
-    countryList.innerHTML = '';
+    // countryList.innerHTML = '';
     const markup = countries
 
      .map(({ name, flags }) => {
@@ -61,6 +65,7 @@ function showingCountryList(countries) {
     
 
 function showingCountryInfo(countries) {
+    // countryInfo.innerHTML = '';
     const markup = countries
     .map(({ capital, population, languages }) => {
       return `

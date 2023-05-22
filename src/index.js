@@ -26,7 +26,7 @@ function onInput(e) {
      if (countries.length === 1) {
         countryInfo.innerHTML = '';
          
-        // countryInfo.innerHTML = markup
+        countryInfo.innerHTML = markup
          showingCountryInfo(countries)
          clearMarkup()
      } else if (countries.length >= 10) {

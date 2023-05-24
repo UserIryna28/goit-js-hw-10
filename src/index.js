@@ -24,14 +24,16 @@ function onInput(e) {
    fetchCountries(name)
  .then(countries => {
      if (countries.length === 1) {
-        countryInfo.innerHTML = '';
+        
+         countryList.innerHTML = '';
          
-        countryInfo.innerHTML = markup
          showingCountryInfo(countries)
-         clearMarkup()
+        
      } else if (countries.length >= 10) {
+         clearMarkup()
          Notify.info("Too many matches found. Please enter a more specific name.")
      } else if (countries.length <= 10) {
+         countryInfo.innerHTML = ""
          showingCountryList(countries)
     
          } else {
@@ -39,14 +41,12 @@ function onInput(e) {
               clearMarkup()
           }
      })
-    .catch(() => {
-        Notify.failure('No country with this name was found')  
-        clearMarkup()
-}) 
+    
+ 
  }
 
 function showingCountryList(countries) {
-    // countryList.innerHTML = '';
+    
     const markup = countries
 
      .map(({ name, flags }) => {
@@ -65,11 +65,13 @@ function showingCountryList(countries) {
     
 
 function showingCountryInfo(countries) {
-    // countryInfo.innerHTML = '';
+    
     const markup = countries
-    .map(({ capital, population, languages }) => {
+    .map(({ flags, name, capital, population, languages }) => {
       return `
         <ul class="country-info__list">
+        <img src="${flags.svg}" alt="${name.official}" width="100" height="auto">
+        <li class="country-info__item-name"><p><b></b>${name.official}</p></li>
             <li class="country-info__item"><p><b>Capital: </b>${capital}</p></li>
             <li class="country-info__item"><p><b>Population: </b>${population}</p></li>
             <li class="country-info__item"><p><b>Languages: </b>${Object.values(languages).join(', ')}</p></li>

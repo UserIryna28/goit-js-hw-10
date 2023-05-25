@@ -1,7 +1,8 @@
 import './css/styles.css';
-import { fetchCountries } from './fetchCountries.js';
+import { fetchCountries } from './js/fetchCountries.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce'
+import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -40,7 +41,15 @@ function onInput(e) {
              showingCountryInfo(country[0])
               clearMarkup()
           }
-     })
+ }).catch(err => {
+     if (err.message === "404") {
+         Notiflix.Notify.failure("Oops, there is no country with that name")
+     }
+     clearMarkup();
+     console.log(err)
+ }
+         
+     )
     
  
  }
